@@ -115,7 +115,7 @@
         showLimitWarning: {
           type: Boolean,
           value: false,
-          computed: '_computeShowLimitWarning(shownOptionsLimit, searchedOptionsLength)'
+          computed: '_computeShowLimitWarning(shownOptionsLimit, searchedOptionsLength, options.length)'
         },
         /** Flag used to show no search result found warning */
         showNoSearchResultsWarning: {
@@ -373,8 +373,8 @@
           item[this.optionLabel].toString().toLowerCase().indexOf(this.search.toLowerCase()) > -1;
     }
 
-    _computeShowLimitWarning(limit, searchedOptionsLength) {
-      if (this._isUndefined(limit) || this._isUndefined(searchedOptionsLength)) {
+    _computeShowLimitWarning(limit, searchedOptionsLength, optionsLength) {
+      if (this._isUndefined(limit) || this._isUndefined(searchedOptionsLength) || optionsLength <= limit) {
         return false;
       }
       return searchedOptionsLength > limit;
